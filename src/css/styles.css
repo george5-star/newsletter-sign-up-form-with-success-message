@@ -49,6 +49,8 @@
   --pad-400: 4em;
   --pad-450: 4.5em;
   --pad-500: 5em;
+
+  --bxsh: 0 10px 10px hsla(19, 100%, 67%, 0.5);
 }
 
 /* utilities */
@@ -60,6 +62,10 @@
   font-weight: var(--fw-bold);
   background-color: var(--clr-neutral--dark-slate-grey);
   padding-block: var(--pad-120);
+}
+
+.btn:is(:hover, :focus) {
+  box-shadow: var(--bxsh);
 }
 
 *,
@@ -88,12 +94,11 @@ body {
 ul {
   list-style: none;
   list-style-position: outside;
-  margin-inline-start: var(--mg-120);
 }
 
-li::marker {
-  content: url(../assets/images/icon-list.svg);
-}
+/* li::marker {
+  content: ;
+} */
 
 img {
   max-width: 100%;
@@ -143,8 +148,21 @@ p {
   padding-block: max(2vh, var(--pad-50));
 }
 
+.hero-message__feature-item::before {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: url(../assets/images/icon-list.svg);
+  background-size: cover;
+  background-position: center;
+  margin-inline-end: 1rem;
+}
+
 .hero-message__feature-item {
   margin-block: var(--mg-100);
+  display: flex;
+  width: 100%;
 }
 
 .form__group {
@@ -267,6 +285,13 @@ p {
 
 .error {
   border: 1px solid var(--clr-primary--tomato);
+}
+
+.input-error {
+  --error: hsla(4, 100%, 67%, 0.3);
+  background-color: var(--error);
+  border: 1px solid var(--error);
+  color: hsl(4, 100%, 67%);
 }
 
 .success__img {

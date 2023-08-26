@@ -7,35 +7,28 @@ const errorMessage = document.querySelector(".form__error-message");
 const emailEl = document.querySelector(".form__input");
 const mainPage = document.querySelector(".container");
 const successPage = document.querySelector(".success");
+const successEmail = document.querySelector(".success__email");
 
-let successEmailValue = document.querySelector(".success__email");
-let isValidEmail;
+const isValidEmail =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-const regex = /email@company/;
+formBtn.addEventListener("click", () => {
+  const emailValue = emailEl.value;
 
-emailEl.addEventListener("input", function (e) {
-  isValidEmail = regex.test(e.target.value);
-  emailEl.classList.add("error");
-  errorMessage.classList.add("show");
-  if (isValidEmail) {
-    emailEl.classList.remove("error");
+  if (isValidEmail.test(emailValue)) {
+    emailEl.classList.remove("input-error");
     errorMessage.classList.remove("show");
-  }
-});
-
-formBtn.addEventListener("click", function () {
-  if (regex.test(emailEl.value)) {
-    mainPage.classList.add("hide");
     successPage.classList.add("show");
-    successEmailValue.textContent = emailEl.value;
+    mainPage.classList.add("hide");
+    emailEl.value = "";
+    successEmail.textContent = emailValue;
   } else {
-    emailEl.classList.add("error");
+    emailEl.classList.add("input-error");
     errorMessage.classList.add("show");
   }
 });
 
-successBtn.addEventListener("click", function () {
+successBtn.addEventListener("click", () => {
   successPage.classList.remove("show");
   mainPage.classList.remove("hide");
-  emailEl.value = "";
 });
